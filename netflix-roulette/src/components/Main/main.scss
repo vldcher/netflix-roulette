@@ -1,0 +1,29 @@
+@import '../../shared/palette.scss';
+
+.main {
+    margin-top: 10px;
+    padding: 0 30px;
+    background-color: $darkgray;
+    color: $white;
+
+    .nav-wrapper {
+        display: block;
+
+        @media (min-width: 768px) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 768px) {
+        padding: 0 50px;
+    }
+
+    @media (min-width: 1200px) {
+        max-width: 1024px;
+        margin: auto;
+        margin-top: 10px;
+    }
+}

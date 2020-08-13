@@ -1,0 +1,27 @@
+@import '../../shared/palette.scss';
+
+.sorting {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+
+    &__title {
+        opacity: .4;
+    }
+    
+    &__list {
+        background-color: $lightgray;
+        color: $white;
+        border: none;
+        padding: 10px;
+        margin-left: 10px;
+        text-transform: uppercase;
+
+    }
+
+    @media (min-width: 768px) {
+        padding: 0;
+    }
+}
