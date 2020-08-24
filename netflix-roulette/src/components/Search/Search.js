@@ -1,11 +1,14 @@
 import React from "react";
 import "./search.scss";
+import { Title } from "../Title";
 
 export default () => {
 
+  const titleText = 'find your movie';
+
   return (
     <div className="search">
-      <h1 className="search__title"> find your movie</h1>
+      <Title text={titleText}/>
 
       <form action="" className="search__form">
         <input className="search__form-input"

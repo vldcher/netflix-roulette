@@ -2,7 +2,7 @@
 
 .button {
     position: relative;
-    padding: 10px 40px;
+    padding: 10px 20px;
     border-radius: 3px;
     margin-top: 10px;
     text-transform: uppercase;
@@ -23,13 +23,17 @@
         color: $primary;
         background-color: transparent;
         font-weight: bold;
-        padding: 10px 30px;
+        padding: 10px 20px;
 
         &:hover {
             cursor: pointer;
             border: 1px solid transparent;
             background-color: $primary;
             color: $white;
+        }
+
+        @media (min-width: 480px) {
+            padding: 10px 30px;
         }
     }
 
@@ -50,6 +54,11 @@
             margin-left: 10px;
             margin-top: 0px;
         }
+    }
+
+    @media (min-width: 480px) {
+        padding: 10px 40px;
+
     }
 }
 

@@ -1,0 +1,54 @@
+@import "../../shared/palette.scss";
+
+.MuiDialog-container {
+    .MuiPaper-root {
+        background-color: $darkgray;
+    }
+}
+
+#picker {
+    fill: $primary;
+}
+
+.MuiDialogContent-root {
+    .MuiInputBase-root,
+    .MuiFormLabel-root,
+    .MuiInputBase-input {
+        color: $white;
+        opacity: 0.8;
+        svg {
+            path {
+                fill: $primary;
+            }
+        }
+    }
+
+    .MuiFormLabel-root.Mui-focused {
+        color: $primary;
+    }
+
+    .MuiFormLabel-filled {
+        color: #09aF00;
+    }
+
+    .MuiInput-underline {
+        &::before {
+            border-bottom-color: $white;
+        }
+        &::after {
+            border-bottom-color: $primary;
+        }
+    }
+}
+
+.MuiDialogActions-root {
+    padding: 8px 24px;
+}
+
+.MuiButtonBase-root.MuiIconButton-root {
+    top: 8px;
+    color: $lightgray;
+    right: 8px;
+    z-index: 2;
+    position: absolute;
+}

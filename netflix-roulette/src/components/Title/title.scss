@@ -1,0 +1,22 @@
+@import '../../shared/palette.scss';
+
+.title {
+    margin: 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: $white;
+    opacity: 0.8;
+    font-weight: 200;
+    letter-spacing: 2px;
+    font-size: 24px;
+    padding: 12px 24px;
+
+    @media (min-width: 480px) {
+        text-align: left;
+        font-size: 30px;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 40px;
+    }
+}
