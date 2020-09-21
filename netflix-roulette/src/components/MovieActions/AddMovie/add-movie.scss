@@ -1,0 +1,12 @@
+@import "../../../shared/palette.scss";
+
+.MuiDialog-container {
+    .MuiPaper-root {
+        background-color: $darkgray;
+    }
+
+    .MuiFormLabel-root.MuiInputLabel-root {
+        text-transform: uppercase;
+        font-size: 14px;
+    }
+}

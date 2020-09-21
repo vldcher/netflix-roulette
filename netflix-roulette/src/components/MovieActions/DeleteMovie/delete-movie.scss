@@ -1,0 +1,7 @@
+@import "../../../shared/palette.scss";
+
+.MuiDialog-container {
+    .MuiPaper-root {
+        background-color: $darkgray;
+    }
+}
