@@ -1,9 +1,10 @@
 import { useContext } from 'react';
-import { PopupContext } from "../../state/context";
+import { PopupContext } from "../../state/popupsContext";
 
-function usePopupStatus() {
-  const { isOpened, setOpen } = useContext(PopupContext);
-  return [isOpened, setOpen];
+const usePopupStatus = () => {
+  const { setOpen, setClose, modalState } = useContext(PopupContext);
+
+  return [setOpen, setClose, modalState];
 }
 
 export default usePopupStatus;

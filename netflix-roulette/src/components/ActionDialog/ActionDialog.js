@@ -24,15 +24,15 @@ const CloseDialog = ((props) => {
 
 export default function ActionDialog({ children }) {
   
-  const [isOpened, setOpen] = usePopupStatus();
+  const [setOpen, setClose, modalState] = usePopupStatus();
 
   const handleClose = () => {
-    setOpen(false);
+    setClose();
   };
 
   return (
     <>
-      <Dialog open={isOpened}  // change true to open
+      <Dialog open={modalState.modalProps.isOpened}  // change true to open
         onClose={handleClose}
         aria-labelledby="form-dialog-title">
         <CloseDialog onClose={handleClose}>

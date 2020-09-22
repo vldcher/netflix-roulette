@@ -8,18 +8,26 @@ import { DeleteMovie } from "../MovieActions/DeleteMovie";
 
 import "./movie-actions.scss";
 
-function MovieActions() {
+function MovieActions(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const [isOpened, setOpen] = usePopupStatus();
+  const [setOpen, setClose, modalState] = usePopupStatus();
+
 
   const handleClick = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
   const handleClickAway = () => {
-    console.log('clicked outside')
     setAnchorEl(null);
+  };
+
+  const openEditPopup = () => {
+    setOpen('edit', { isOpened: true, movieData: props.movieData });
+  };
+
+  const openDeletePopup = () => {
+    setOpen('delete', { isOpened: true, movieData: props.movieData });
   };
 
   const open = Boolean(anchorEl);
@@ -35,19 +43,20 @@ function MovieActions() {
         className="actions__button">
       </button>
 
-
       <Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end">
         <ClickAwayListener onClickAway={handleClickAway}>
 
           <ul className="actions">
-            <li className="actions__option" onClick={setOpen}>Edit</li>
-            <ActionDialog>
-              <EditMovie />
-            </ActionDialog >
-            <li className="actions__option">Delete</li>
-            {/* <ActionDialog>
-              <DeleteMovie />
-            </ActionDialog > */}
+            <li className="actions__option" onClick={openEditPopup}>Edit</li>
+            {modalState.modalType === 'edit' &&
+              (<ActionDialog>
+                <EditMovie movieInfo={modalState.modalProps} />
+              </ActionDialog >)}
+            <li className="actions__option" onClick={openDeletePopup}>Delete</li>
+            {modalState.modalType === 'delete' &&
+              (<ActionDialog>
+                <DeleteMovie movieInfo={modalState.modalProps}/>
+              </ActionDialog >)}
           </ul>
         </ClickAwayListener>
 

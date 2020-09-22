@@ -18,18 +18,18 @@ export default () => {
   ];
 
   const sortingVariants = [
-  { id: 1, value: "release date" },
-  { id: 2, value: "name" },
-];
+    { id: 1, value: "release date" },
+    { id: 2, value: "name" },
+  ];
 
   return (
     <main className="main">
       <section className="nav-wrapper">
         <FiltersList />
-        <Sorting sortingVariants={sortingVariants}/>
+        <Sorting sortingVariants={sortingVariants} />
       </section>
       <section className="movies-wrapper">
-        <Movie moviesList={moviesList}/>
+        <Movie moviesList={moviesList} />
       </section>
     </main>
   );
