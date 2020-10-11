@@ -1,0 +1,35 @@
+@import "../../../shared/palette.scss";
+
+.nav-wrapper {
+    display: block;
+
+    @media (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.filter {
+    overflow: auto;
+    position: relative;
+
+    .MuiToggleButtonGroup-root {
+        .MuiToggleButton-root {
+            color: $white;
+            border: none;
+
+            &:hover {
+                color: $primary;
+            }
+        }
+    }
+
+    &__list {
+        padding: 10px 0;
+        margin: 10px 0;
+        list-style-type: none;
+        display: flex;
+    }
+}

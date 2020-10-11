@@ -8,7 +8,6 @@ const MoviesProvider = (props) => {
     const value = {
         isDetailsVisible: isMovieDetailsVisible,
         updateDetailsVisibility: () => {
-            console.log('hello');
             setMovieDetailsVisible(!isMovieDetailsVisible);
         } 
     };
