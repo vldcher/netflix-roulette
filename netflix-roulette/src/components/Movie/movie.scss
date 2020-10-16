@@ -28,6 +28,11 @@
             margin: 10px 10px 30px 10px;
             max-width: 220px;
 
+            a {
+                text-decoration: none;
+                color: $white;
+            }
+
             .movie__title {
                 display: flex;
                 justify-content: space-between;

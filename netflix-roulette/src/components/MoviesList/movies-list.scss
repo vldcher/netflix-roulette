@@ -1,4 +1,19 @@
-@import '../../shared/palette.scss';
+@import "../../shared/palette.scss";
 
 .movies {
-position: relative;}
+    position: relative;
+
+    &__list-not-found {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50vh;
+
+        &-title {
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: lighter;
+        }
+    }
+}

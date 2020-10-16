@@ -15,6 +15,8 @@ const moviesReducer = (state = moviesInitState, { type, payload }) => {
         movieList: [...payload],
         filteredMovieList: [...payload],
       };
+    case actionTypes.FETCH_MOVIE_BY_ID:
+      return { ...state, selectedMovie: { ...payload }, movieView: true };
     case actionTypes.EDIT_MOVIE:
       const updatedList = [...state.movieList].map(
         (movie) => (movie = movie.id === payload.id ? payload : movie)

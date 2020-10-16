@@ -43,21 +43,35 @@ const MoviesList = () => {
     <ErrorBoundry>
       <>
         <MovieListActions genres={genres} />
-        <div className="movies__results">
-          <p className="movies__results-paragraph">
-            <span className="movies__results-quantity">
-              {getMovieList().length}
-            </span>
-        movies found
-      </p>
-        </div>
+        { getMovieList().length
+          ?
+          <div className="movies__results">
+            <p className="movies__results-paragraph">
+              <span className="movies__results-quantity">
+                {getMovieList().length}
+              </span>
+            movies found
+          </p>
+          </div>
+          :
+          null
+        }
         <ul className="movies__list">
-          {getMovieList().map((movie) =>
-            <Movie
-              key={movie.id}
-              movie={movie}
-            />
-          )}
+          {filteredMovieList.length
+            ? (
+              getMovieList().map((movie) =>
+                <Movie
+                  key={movie.id}
+                  movie={movie}
+                />
+              )
+            )
+            : (
+              <div className="movies__list-not-found">
+                <h1 className="movies__list-not-found-title">no movie found</h1>
+              </div>
+            )
+          }
         </ul>
       </>
     </ErrorBoundry>

@@ -58,6 +58,24 @@ export const deleteMovie = (deletedMovie) => async (dispatch) => {
   });
 };
 
+export const fetchMovieById = (movieId, history = null) => async (dispatch) => {
+  const res = await axios
+    .get(`${BASE_URL}/movieList/${movieId}`)
+    .catch((err) => {
+      if (history) {
+        history.push("/");
+      }
+    });
+  if (res) {
+    dispatch({ type: actionTypes.FETCH_MOVIE_BY_ID, payload: res.data });
+  }
+};
+
+export const fetchSearchMovies = (searchTerm) => async (dispatch) => {
+  const res = await axios.get(`${BASE_URL}/movieList?q=${searchTerm}`);
+  dispatch({ type: actionTypes.FETCH_MOVIES, payload: res.data });
+};
+
 export const filterMovies = (filterBy) => ({
   type: actionTypes.FILTER_MOVIES,
   payload: filterBy,

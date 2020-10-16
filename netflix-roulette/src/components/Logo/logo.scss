@@ -1,6 +1,7 @@
 @import '../../shared/palette.scss';
 
 .logo {
+    position: relative;
     color: $primary;
     font-weight: normal;
     z-index: 1;
