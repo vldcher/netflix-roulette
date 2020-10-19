@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { useFormik } from "formik";
+
 import {
-  TextField,
-  DialogContent, InputLabel, MenuItem, FormControl, Select, makeStyles
+  DialogContent, DialogActions, MenuItem, FormControl, Select, makeStyles, Checkbox, ListItemText, FormHelperText
 } from '@material-ui/core';
 
 import './add-movie.scss';
 
+import { addMovie, updateMovie } from "../../../store/actions/actionCreators";
 import { Title } from '../../Title';
+import { InputField } from '../InputField/InputField';
+import usePopupStatus from '../../hooks/customHook';
+
 
 const useStyles = makeStyles((theme) => ({
   closeButton: {
@@ -30,79 +36,211 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const titleText = 'add movie';
 
-export default function ActionDialog() {
-  const [genre, setGenre] = React.useState('');
+const AddMovie = ({ editedMovie }) => {
+  const dispatch = useDispatch();
+  const { formControl } = useStyles();
+  const [setOpen, setClose, modalState] = usePopupStatus();
+  const genres = useSelector((state) => state.genres.list);
+  const [form, setFormFieldsData] = useState({
+    title: "",
+    year: "",
+    genres: [],
+    description: "",
+    runTime: "",
+  });
 
-  const { textField, formControl } = useStyles();
+  const titleText = editedMovie ? 'edit movie' : 'add movie';
 
-  const handleChange = (event) => {
-    setGenre(event.target.value);
+  useEffect(() => {
+    if (editedMovie) {
+      setFormFieldsData({
+        title: editedMovie.title,
+        year: editedMovie.year,
+        genres: [...editedMovie.genres],
+        description: editedMovie.description,
+        runTime: editedMovie.runTime,
+      });
+    }
+  }, [editedMovie]);
+
+  const onReset = () => {
+    setFormFieldsData({
+      title: "",
+      year: "",
+      genres: [],
+      description: "",
+      runTime: "",
+    });
+    manageForm.resetForm();
+    setClose();
   };
+
+  const onSave = (formValues) => {
+
+    const newMovieData = {
+      ...formValues,
+      genres: [...formValues.genres],
+    };
+
+    if (editedMovie) {
+      const updatedMovie = {
+        ...editedMovie,
+        ...newMovieData,
+      };
+      dispatch(updateMovie(updatedMovie));
+    } else {
+      newMovieData.photo = {
+        title: "No picture found",
+      };
+      newMovieData.rate = 0;
+      dispatch(addMovie(newMovieData));
+    }
+    onReset();
+  };
+
+  const formInputs = [
+    {
+      id: "title",
+      title: "Title",
+      placeholder: "Title here",
+      value: form.title,
+      inputProps: null,
+    },
+    {
+      id: "year",
+      title: "Release Date",
+      placeholder: "Select Date",
+      type: "date",
+      inputProps: null,
+      value: form.year,
+    },
+    {
+      id: "description",
+      title: "Overview",
+      placeholder: "Overview here",
+      value: form.description,
+      inputProps: null,
+    },
+    {
+      id: "runTime",
+      title: "Runtime",
+      placeholder: "Runtime here",
+      value: form.runTime,
+      inputProps: null,
+    },
+  ];
+
+
+  const manageForm = useFormik({
+    initialValues: form,
+    validate: ({ title, year, description, genres, runTime }) => {
+      const errors = {};
+      if (!title) {
+        errors.title = "Please write some title";
+      }
+      if (!year) {
+        errors.year = "Please choose release date";
+      }
+      if (!description) {
+        errors.description = "Please write some description";
+      }
+      if (!runTime) {
+        errors.runTime = "Please write runtime";
+      }
+      if (!genres.length) {
+        errors.genres = "Please choose genre(s)";
+      }
+      return errors;
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      setSubmitting(false);
+      onSave(values);
+    },
+  });
 
   return (
     <>
       <Title text={titleText} />
       <DialogContent className="dialog-content">
-        <TextField
-          autoFocus
-          margin="dense"
-          id="title"
-          label="title"
-          type="text"
-          className={textField}
-        />
+        <form
+          autoComplete="off"
+          noValidate
+          onSubmit={manageForm.handleSubmit}
+        >
+          {formInputs.map((input, i) => {
+            return (
+              <InputField
+                key={"formInput" + i}
+                changeKey={"formInput" + i}
+                id={input.id}
+                title={input.title}
+                type={input.type}
+                placeholder={input.placeholder}
+                value={manageForm.values[input.id]}
+                InputProps={input.inputProps}
+                error={!!manageForm.errors[input.id]}
+                helperText={manageForm.errors[input.id]}
+                onChange={manageForm.handleChange}
+                onBlur={manageForm.handleBlur}
+              />
+            );
+          })}
 
-        <TextField
-          id="date"
-          label="release date"
-          type="date"
-          defaultValue="2017-05-24"
-          className={textField}
-          InputLabelProps={{
-            shrink: true,
-          }}
-        />
-
-        <TextField
-          margin="dense"
-          id="movie-url"
-          label="movie url"
-          type="text"
-          className={textField}
-        />
-
-        <FormControl className={formControl}>
-          <InputLabel id="demo-simple-select-label">Genre</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={genre}
-            onChange={handleChange}
-          >
-            <MenuItem value='western'>Western</MenuItem>
-            <MenuItem value='drama'>Drama</MenuItem>
-            <MenuItem value='comedy'>Comedy</MenuItem>
-          </Select>
-        </FormControl>
-
-        <TextField
-          margin="dense"
-          id="overview"
-          label="overview"
-          type="text"
-          className={textField}
-        />
-
-        <TextField
-          margin="dense"
-          id="runtime"
-          label="runtime"
-          type="text"
-          className={textField}
-        />
+          <FormControl className={formControl}
+            error={!!manageForm.errors.genres}>
+            <label htmlFor="manage-genres">Genres</label>
+            <Select
+              value={manageForm.values.genres}
+              onChange={manageForm.handleChange}
+              onBlur={manageForm.handleBlur}
+              name="genres"
+              id="manage-genres"
+              multiple
+              displayEmpty
+              renderValue={(selected) => {
+                if (selected.length === 0) {
+                  return (
+                    <span style={{ color: "rgb(147 147 147)" }}>
+                      Select Genre
+                    </span>
+                  );
+                }
+                return selected
+                  .map(
+                    (value) => genres.find(({ code }) => value === code).title
+                  )
+                  .join(", ");
+              }}
+            >
+              {genres.map((genre) => (
+                <MenuItem key={genre.code} value={genre.code}>
+                  <Checkbox
+                    checked={manageForm.values.genres.indexOf(genre.code) > -1}
+                  />
+                  <ListItemText
+                    primary={genre.title}
+                  />
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>{manageForm.errors.genres}</FormHelperText>
+          </FormControl>
+          <DialogActions>
+            <button className="button button__secondary"
+              onClick={onReset}>
+              Cancel
+          </button>
+            <button className="button button__primary"
+              type="submit">
+              Save
+          </button>
+          </DialogActions>
+        </form>
       </DialogContent>
+
     </>
   );
 }
+
+export default AddMovie;

@@ -6,17 +6,6 @@
     background-color: $darkgray;
     color: $white;
 
-    .nav-wrapper {
-        display: block;
-
-        @media (min-width: 768px) {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-    }
-
     @media (min-width: 768px) {
         padding: 0 50px;
     }

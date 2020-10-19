@@ -1,0 +1,151 @@
+{
+  "sortBy": [
+    {
+      "code": "1",
+      "title": "year"
+    },
+    {
+      "code": "2",
+      "title": "title"
+    },
+    {
+      "code": "3",
+      "title": "rate"
+    }
+  ],
+  "genres": [
+    {
+      "code": "0",
+      "title": "Action"
+    },
+    {
+      "code": "1",
+      "title": "Adventure"
+    },
+    {
+      "code": "2",
+      "title": "Biography"
+    },
+    {
+      "code": "3",
+      "title": "Oscar Winning Movie"
+    },
+    {
+      "code": "4",
+      "title": "Music"
+    },
+    {
+      "code": "5",
+      "title": "Drama"
+    }
+  ],
+  "movieList": [
+    {
+      "id": 1,
+      "title": "Pulp fiction",
+      "genres": [
+        "0",
+        "1"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "178",
+      "rate": 8.9,
+      "year": "1994-02-02",
+      "photo": {
+        "link": "./src/img/film1.png",
+        "title": "Pulp fiction"
+      }
+    },
+    {
+      "id": 3,
+      "title": "Kill Bill: Vol 2",
+      "genres": [
+        "3"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "138",
+      "rate": 8,
+      "year": "2004-01-01",
+      "photo": {
+        "title": "Kill Bill: Vol 2"
+      }
+    },
+    {
+      "id": 5,
+      "title": "Inception",
+      "genres": [
+        "0",
+        "1"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "162",
+      "rate": 8.8,
+      "year": "2010-10-10",
+      "photo": {
+        "title": "Inception"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Reservoir dogs",
+      "genres": [
+        "3"
+      ],
+      "description": "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quas numquam nisi eligendi id repellendus tempore neque explicabo rerum, similique ex maxime quae quod ipsam quibusdam. Officiis eligendi sint odio reprehenderit?",
+      "runTime": "100",
+      "rate": 8.3,
+      "year": "1992-02-12",
+      "photo": {
+        "title": "Reservoir dogs"
+      }
+    },
+    {
+      "title": "asd",
+      "year": "2020-10-23",
+      "genres": [
+        "3"
+      ],
+      "description": "sad",
+      "runTime": "12",
+      "photo": {
+        "title": "No picture found"
+      },
+      "rate": 0,
+      "id": 7
+    },
+    {
+      "title": "qwe",
+      "year": "2020-10-15",
+      "genres": [
+        "3",
+        "0",
+        "1",
+        "5",
+        "4",
+        "2"
+      ],
+      "description": "sad",
+      "runTime": "asd",
+      "photo": {
+        "title": "No picture found"
+      },
+      "rate": 0,
+      "id": 8
+    },
+    {
+      "title": "Helllo",
+      "year": "2023-07-06",
+      "genres": [
+        "1",
+        "4"
+      ],
+      "description": "overview",
+      "runTime": "99",
+      "photo": {
+        "title": "No picture found"
+      },
+      "rate": 0,
+      "id": 9
+    }
+  ]
+}

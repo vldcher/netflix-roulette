@@ -12,7 +12,6 @@ function reducer(state, action) {
   switch (action.type) {
 
     case SHOW_MODAL:
-      console.log('action', action);
       return {
           modalType: action.modalType,
           modalProps: action.modalProps

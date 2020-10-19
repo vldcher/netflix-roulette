@@ -1,1 +1,0 @@
-export { default as FiltersList } from "./FiltersList";

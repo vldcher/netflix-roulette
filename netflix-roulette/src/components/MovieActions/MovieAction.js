@@ -1,21 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import Popper from '@material-ui/core/Popper';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener'
 import usePopupStatus from '../hooks/customHook';
 import { ActionDialog } from "../ActionDialog";
-import { EditMovie } from "../MovieActions/EditMovie";
+import { AddMovie } from "../MovieActions/AddMovie";
 import { DeleteMovie } from "../MovieActions/DeleteMovie";
 
 import "./movie-actions.scss";
 
-function MovieActions(props) {
+function MovieActions({movieData}) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [setOpen, setClose, modalState] = usePopupStatus();
-
+  const [editedMovie, setEditedMovie] = useState(false);
 
   const handleClick = (event) => {
-    setAnchorEl(anchorEl ? null : event.currentTarget);
+    setEditedMovie(movieData);
+    setAnchorEl(event.currentTarget);
   };
 
   const handleClickAway = () => {
@@ -23,11 +24,11 @@ function MovieActions(props) {
   };
 
   const openEditPopup = () => {
-    setOpen('edit', { isOpened: true, movieData: props.movieData });
+    setOpen('edit', { isOpened: true, movieData: movieData });
   };
 
   const openDeletePopup = () => {
-    setOpen('delete', { isOpened: true, movieData: props.movieData });
+    setOpen('delete', { isOpened: true, movieData: movieData });
   };
 
   const open = Boolean(anchorEl);
@@ -40,7 +41,7 @@ function MovieActions(props) {
         aria-describedby={id}
         type="button"
         onClick={handleClick}
-        className="actions__button">
+        className="movie__action-button">
       </button>
 
       <Popper id={id} open={open} anchorEl={anchorEl} placement="bottom-end">
@@ -50,12 +51,12 @@ function MovieActions(props) {
             <li className="actions__option" onClick={openEditPopup}>Edit</li>
             {modalState.modalType === 'edit' &&
               (<ActionDialog>
-                <EditMovie movieInfo={modalState.modalProps} />
+                <AddMovie editedMovie={editedMovie} />
               </ActionDialog >)}
             <li className="actions__option" onClick={openDeletePopup}>Delete</li>
             {modalState.modalType === 'delete' &&
               (<ActionDialog>
-                <DeleteMovie movieInfo={modalState.modalProps}/>
+                <DeleteMovie deletedMovie={modalState.modalProps}/>
               </ActionDialog >)}
           </ul>
         </ClickAwayListener>
