@@ -56,6 +56,11 @@
         }
     }
 
+    &--not-found {
+        text-decoration: none;
+        margin-bottom: 50px;
+    }
+
     @media (min-width: 480px) {
         padding: 10px 40px;
 

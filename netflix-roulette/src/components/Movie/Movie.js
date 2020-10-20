@@ -1,28 +1,42 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
+import { useSelector } from "react-redux";
+
 import PropTypes from 'prop-types';
 import MovieAction from "../MovieActions/MovieAction";
+import { Link } from "react-router-dom";
 
 import "./movie.scss";
 import filmImg from "../../img/film1.png"
 
 import { MoviesContext } from "../../state/moviesContext";
+import { useGenresListState } from "../../store/selectors/movies.selector";
+
 
 function Movie(props) {
 
-  const { updateDetailsVisibility } = useContext(MoviesContext);
+  const genreList = useSelector(useGenresListState);
 
-  const { title, year, description, photo } = props.movie;
+  const { isDetailsVisible, updateDetailsVisibility } = useContext(MoviesContext);
+
+  const { id, title, year, genres, photo } = props.movie;
 
   return (
     <li
       className="movies__list-item">
-      <img src={filmImg} alt={photo.title}></img>
       <MovieAction movieData={props.movie} />
-      <div className="movie__title" onClick={updateDetailsVisibility}>
-        {title}
-        <span className="movie__year">{year.split("-")[0]}</span>
-      </div>
-      <p className="movie__description">{description}</p>
+      <Link to={`/film/${id}`} onClick={() => updateDetailsVisibility(false)}>
+      <img src={filmImg} alt={photo.title}/>
+        <div className="movie__title">
+          {title}
+          <span className="movie__year">{year.split("-")[0]}</span>
+        </div>
+        <p className="movie__description">
+          {genreList
+            .filter(({ code }) => code !== "0" && genres.includes(code))
+            .map(({ title }) => title)
+            .join(", ")}
+        </p>
+      </Link>
     </li>
   );
 }
@@ -32,7 +46,7 @@ Movie.propTypes = {
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     year: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
+    genres: PropTypes.array.isRequired,
   })
 };
 
