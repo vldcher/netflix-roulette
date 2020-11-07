@@ -167,6 +167,7 @@ const AddMovie = ({ editedMovie }) => {
           autoComplete="off"
           noValidate
           onSubmit={manageForm.handleSubmit}
+          data-test="add-movie"
         >
           {formInputs.map((input, i) => {
             return (
@@ -226,8 +227,9 @@ const AddMovie = ({ editedMovie }) => {
             </Select>
             <FormHelperText>{manageForm.errors.genres}</FormHelperText>
           </FormControl>
-          <DialogActions>
+          <DialogActions data-test="action-buttons">
             <button className="button button__secondary"
+              type="reset"
               onClick={onReset}>
               Cancel
           </button>
