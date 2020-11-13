@@ -138,24 +138,24 @@
       "photo": {
         "title": "No picture found"
       },
-      "rate": 5.0,
+      "rate": 5,
       "id": 8
     },
     {
-      "title": "Helllo",
-      "year": "2023-07-06",
+      "title": "sad",
+      "year": "2020-11-03",
       "genres": [
-        "0",
         "1",
-        "4"
+        "3",
+        "6"
       ],
-      "description": "overview",
-      "runTime": "99",
+      "description": "123",
+      "runTime": "123",
       "photo": {
         "title": "No picture found"
       },
-      "rate": 2.8,
-      "id": 9
+      "rate": 0,
+      "id": 10
     }
   ]
 }

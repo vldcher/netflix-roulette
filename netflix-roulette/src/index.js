@@ -1,25 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { createStore, applyMiddleware, compose } from "redux";
-import reducers from "./store/reducers";
+import configureStore from "./configure-store";
 
 import './index.scss';
 import App from './App';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const initialState = global.window && global.window.__INITIAL_STATE__
+const store = configureStore(initialState);
 
-const store = createStore(reducers, /* preloadedState, */ composeEnhancers(
-  applyMiddleware(thunk))
-);
+// ReactDOM.hydrate(
+//   <React.StrictMode>
+//     <Provider store={store}>
+//       <App />
+//     </Provider>
+//   </React.StrictMode>,
+//   document.getElementById('root')
+// );
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
-);
-
+ReactDOM.hydrate(<App store={store}/>, document.getElementById('root'));
